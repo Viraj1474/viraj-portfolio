@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard – Resume Requests</title>
+  <style>
+    :root {
+      --gold: #d4af37;
+      --gold-hover: #f0c842;
+      --bg: #f5f5f5;
+      --card-bg: #ffffff;
+      --text: #1f1f1f;
+      --muted: #666;
+      --border: #e0e0e0;
+      --danger: #dc3545;
+      --success: #28a745;
+      --info: #0d6efd;
+      --warn: #fd7e14;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); color: var(--text); }
+
+    /* ── Header ── */
+    header {
+      background: var(--gold);
+      color: #fff;
+      padding: 18px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 8px rgba(0,0,0,.15);
+    }
+    header h1 { font-size: 1.4rem; font-weight: 700; letter-spacing: .5px; }
+    header span { font-size: .9rem; opacity: .85; }
+
+    /* ── Layout ── */
+    main { max-width: 1200px; margin: 32px auto; padding: 0 20px; }
+
+    /* ── Stats bar ── */
+    .stats { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 28px; }
+    .stat-card {
+      flex: 1; min-width: 140px;
+      background: var(--card-bg);
+      border-radius: 10px;
+      padding: 18px 24px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,.07);
+      border-top: 4px solid var(--gold);
+    }
+    .stat-card .num { font-size: 2rem; font-weight: 700; color: var(--gold); }
+    .stat-card .lbl { font-size: .8rem; color: var(--muted); margin-top: 4px; text-transform: uppercase; letter-spacing: .5px; }
+
+    /* ── Tabs ── */
+    .tabs { display: flex; gap: 4px; margin-bottom: 20px; border-bottom: 2px solid var(--border); }
+    .tab-btn {
+      padding: 10px 22px; border: none; background: none;
+      cursor: pointer; font-size: .95rem; color: var(--muted);
+      border-bottom: 3px solid transparent; margin-bottom: -2px;
+      transition: color .2s, border-color .2s;
+    }
+    .tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); font-weight: 600; }
+    .tab-btn:hover { color: var(--gold); }
+
+    /* ── Table ── */
+    .table-wrap { overflow-x: auto; background: var(--card-bg); border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,.07); }
+    table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+    thead th {
+      background: #fafafa; color: var(--muted);
+      padding: 12px 16px; text-align: left;
+      font-weight: 600; font-size: .78rem;
+      text-transform: uppercase; letter-spacing: .5px;
+      border-bottom: 2px solid var(--border);
+    }
+    tbody tr { border-bottom: 1px solid var(--border); transition: background .15s; }
+    tbody tr:hover { background: #fdf9ee; }
+    tbody tr:last-child { border-bottom: none; }
+    td { padding: 14px 16px; vertical-align: top; }
+    td .name { font-weight: 600; margin-bottom: 2px; }
+    td .email { color: var(--muted); font-size: .82rem; }
+    td .reason-text { max-width: 260px; white-space: pre-wrap; word-break: break-word; font-size: .85rem; color: #444; }
+
+    /* ── Badges ── */
+    .badge {
+      display: inline-block; padding: 3px 10px;
+      border-radius: 20px; font-size: .75rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: .3px;
+    }
+    .badge-pending  { background: #fff3cd; color: #856404; }
+    .badge-approved { background: #d1e7dd; color: #0f5132; }
+    .badge-rejected { background: #f8d7da; color: #842029; }
+
+    /* ── Action buttons ── */
+    .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    .btn-approve, .btn-reject {
+      padding: 6px 14px; border: none; border-radius: 6px;
+      cursor: pointer; font-size: .82rem; font-weight: 600;
+      transition: opacity .2s, transform .1s;
+    }
+    .btn-approve { background: var(--success); color: #fff; }
+    .btn-reject  { background: var(--danger);  color: #fff; }
+    .btn-approve:hover, .btn-reject:hover { opacity: .85; }
+    .btn-approve:active, .btn-reject:active { transform: scale(.97); }
+    .btn-approve:disabled, .btn-reject:disabled { opacity: .5; cursor: not-allowed; }
+
+    /* ── Toast ── */
+    #toast {
+      position: fixed; bottom: 28px; right: 28px;
+      background: #333; color: #fff;
+      padding: 12px 22px; border-radius: 8px;
+      font-size: .9rem; box-shadow: 0 4px 16px rgba(0,0,0,.25);
+      opacity: 0; pointer-events: none;
+      transition: opacity .3s, transform .3s;
+      transform: translateY(12px);
+      z-index: 9999;
+    }
+    #toast.show { opacity: 1; transform: translateY(0); }
+    #toast.success { background: var(--success); }
+    #toast.error   { background: var(--danger);  }
+
+    /* ── Empty state ── */
+    .empty { padding: 48px; text-align: center; color: var(--muted); }
+    .empty i { font-size: 2.5rem; display: block; margin-bottom: 12px; opacity: .4; }
+
+    /* ── Loading overlay ── */
+    #loading { display: none; position: fixed; inset: 0; background: rgba(255,255,255,.6); z-index: 8000; justify-content: center; align-items: center; }
+    #loading.show { display: flex; }
+    .spinner { width: 40px; height: 40px; border: 4px solid var(--border); border-top-color: var(--gold); border-radius: 50%; animation: spin .8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Responsive ── */
+    @media (max-width: 700px) {
+      header { flex-direction: column; gap: 6px; text-align: center; }
+      td .reason-text { max-width: 160px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>&#x1F4CB; Resume Access Dashboard</h1>
+  <span>Viraj Kulye &mdash; Portfolio Admin</span>
+</header>
+
+<main>
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat-card"><div class="num" id="count-pending">–</div><div class="lbl">Pending</div></div>
+    <div class="stat-card"><div class="num" id="count-approved">–</div><div class="lbl">Approved</div></div>
+    <div class="stat-card"><div class="num" id="count-rejected">–</div><div class="lbl">Rejected</div></div>
+    <div class="stat-card"><div class="num" id="count-total">–</div><div class="lbl">Total</div></div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="pending">Pending</button>
+    <button class="tab-btn" data-tab="approved">Approved</button>
+    <button class="tab-btn" data-tab="rejected">Rejected</button>
+    <button class="tab-btn" data-tab="all">All</button>
+  </div>
+
+  <!-- Table container -->
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Applicant</th>
+          <th>Company</th>
+          <th>Role / Purpose</th>
+          <th>Reason</th>
+          <th>Requested</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="requests-tbody">
+        <tr><td colspan="8" class="empty">Loading…</td></tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+
+<!-- Loading overlay -->
+<div id="loading"><div class="spinner"></div></div>
+
+<!-- Toast notification -->
+<div id="toast"></div>
+
+<script>
+// ── Config ────────────────────────────────────────────────────────────────────
+// The admin dashboard is served BY the backend, so relative paths work fine.
+const API = '';   // empty string → same origin
+
+// ── State ─────────────────────────────────────────────────────────────────────
+let allRequests = [];
+let currentTab  = 'pending';
+
+// ── Helpers ───────────────────────────────────────────────────────────────────
+function showLoading(on) {
+  document.getElementById('loading').classList.toggle('show', on);
+}
+
+function toast(msg, type = 'success') {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = 'show ' + type;
+  clearTimeout(el._timer);
+  el._timer = setTimeout(() => el.classList.remove('show'), 3500);
+}
+
+function fmtDate(iso) {
+  if (!iso) return '–';
+  return new Date(iso).toLocaleString(undefined, {
+    year: 'numeric', month: 'short', day: 'numeric',
+    hour: '2-digit', minute: '2-digit'
+  });
+}
+
+function badgeHtml(status) {
+  return `<span class="badge badge-${status}">${status}</span>`;
+}
+
+function escHtml(str) {
+  return String(str)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ── Fetch all requests ────────────────────────────────────────────────────────
+async function loadRequests() {
+  showLoading(true);
+  try {
+    const res = await fetch(`${API}/api/admin/requests`, { credentials: 'include' });
+    if (!res.ok) throw new Error('Failed to load requests');
+    allRequests = await res.json();
+    updateStats();
+    renderTable(currentTab);
+  } catch (e) {
+    document.getElementById('requests-tbody').innerHTML =
+      `<tr><td colspan="8" class="empty">Error loading data. Refresh the page.</td></tr>`;
+    toast('Failed to load requests', 'error');
+  } finally {
+    showLoading(false);
+  }
+}
+
+// ── Stats ─────────────────────────────────────────────────────────────────────
+function updateStats() {
+  const counts = { pending: 0, approved: 0, rejected: 0 };
+  allRequests.forEach(r => { if (counts[r.status] !== undefined) counts[r.status]++; });
+  document.getElementById('count-pending').textContent  = counts.pending;
+  document.getElementById('count-approved').textContent = counts.approved;
+  document.getElementById('count-rejected').textContent = counts.rejected;
+  document.getElementById('count-total').textContent    = allRequests.length;
+}
+
+// ── Render table ──────────────────────────────────────────────────────────────
+function renderTable(tab) {
+  const filtered = tab === 'all' ? allRequests : allRequests.filter(r => r.status === tab);
+  const tbody = document.getElementById('requests-tbody');
+
+  if (!filtered.length) {
+    tbody.innerHTML = `<tr><td colspan="8" class="empty">No ${tab === 'all' ? '' : tab + ' '}requests found.</td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = filtered.map(r => `
+    <tr data-id="${r.id}">
+      <td>${r.id}</td>
+      <td>
+        <div class="name">${escHtml(r.full_name)}</div>
+        <div class="email">${escHtml(r.email)}</div>
+      </td>
+      <td>${escHtml(r.company)}</td>
+      <td>${escHtml(r.job_role)}</td>
+      <td><div class="reason-text">${escHtml(r.reason)}</div></td>
+      <td>${fmtDate(r.created_at)}</td>
+      <td>${badgeHtml(r.status)}</td>
+      <td>
+        <div class="actions">
+          ${r.status === 'pending' ? `
+            <button class="btn-approve" onclick="doAction(${r.id},'approve',this)">✓ Approve</button>
+            <button class="btn-reject"  onclick="doAction(${r.id},'reject',this)">✗ Reject</button>
+          ` : r.status === 'approved' ? `
+            <button class="btn-reject" onclick="doAction(${r.id},'reject',this)">✗ Reject</button>
+          ` : `
+            <button class="btn-approve" onclick="doAction(${r.id},'approve',this)">✓ Re-approve</button>
+          `}
+        </div>
+      </td>
+    </tr>
+  `).join('');
+}
+
+// ── Approve / Reject action ───────────────────────────────────────────────────
+async function doAction(id, action, btn) {
+  if (!confirm(`${action.charAt(0).toUpperCase() + action.slice(1)} request #${id}?`)) return;
+
+  // Disable all buttons in this row
+  const row = btn.closest('tr');
+  row.querySelectorAll('button').forEach(b => b.disabled = true);
+
+  showLoading(true);
+  try {
+    const res = await fetch(`${API}/api/admin/requests/${id}/${action}`, {
+      method: 'POST',
+      credentials: 'include'
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.detail || 'Action failed');
+    toast(data.message || `Request #${id} ${action}d successfully.`, 'success');
+    await loadRequests(); // refresh
+  } catch (e) {
+    toast(e.message || 'Action failed. Please try again.', 'error');
+    row.querySelectorAll('button').forEach(b => b.disabled = false);
+  } finally {
+    showLoading(false);
+  }
+}
+
+// ── Tabs ─────────────────────────────────────────────────────────────────────
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentTab = btn.dataset.tab;
+    renderTable(currentTab);
+  });
+});
+
+// ── Init ─────────────────────────────────────────────────────────────────────
+loadRequests();
+// Auto-refresh every 60 seconds
+setInterval(loadRequests, 60000);
+</script>
+</body>
+</html>

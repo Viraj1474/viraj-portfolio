@@ -1,0 +1,55 @@
+# ── Secrets ──────────────────────────────────────────────────────────────────
+.env
+*.env
+
+# ── Private resume PDF ────────────────────────────────────────────────────────
+# The resume is served privately by the backend at runtime.
+# It is NOT committed to the public repository.
+# For production deployment, upload the PDF via your hosting platform's
+# private file storage or secret mounting mechanism.
+# See backend/README.md → "Resume Storage Security" for details.
+private/
+
+# ── Database (contains PII) ───────────────────────────────────────────────────
+*.db
+*.sqlite
+*.sqlite3
+
+# ── Python ────────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+.Python
+*.so
+
+# ── Virtual environments ──────────────────────────────────────────────────────
+venv/
+env/
+.venv/
+.env/
+ENV/
+
+# ── Distribution / packaging ─────────────────────────────────────────────────
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# ── IDE ───────────────────────────────────────────────────────────────────────
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# ── Logs ──────────────────────────────────────────────────────────────────────
+*.log
+logs/
+
+# ── Pytest / coverage ─────────────────────────────────────────────────────────
+.pytest_cache/
+.coverage
+htmlcov/

@@ -1,0 +1,28 @@
+# Resume Access Request System – Python dependencies
+# Install with:  pip install -r requirements.txt
+
+# Web framework
+fastapi==0.115.5
+uvicorn[standard]==0.32.1
+
+# Database ORM
+sqlalchemy==2.0.36
+
+# Data validation
+pydantic==2.10.3
+pydantic[email]==2.10.3
+
+# Environment variables
+python-dotenv==1.0.1
+
+# Password hashing (recommended for production admin auth)
+bcrypt==4.2.1
+
+# Jinja2 templating (admin dashboard)
+jinja2==3.1.4
+
+# ASGI standard
+starlette==0.41.3
+
+# email-validator is required for pydantic EmailStr
+email-validator==2.2.0
