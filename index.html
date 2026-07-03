@@ -1,32 +1,357 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <title>Viraj Kulye | Portfolio</title>
+  
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="Viraj Kulye | Python Developer & Data Engineer">
+  <meta name="description" content="Portfolio of Viraj Kulye - Python Developer, Data Engineer and AI/ML Enthusiast. Explore my projects, skills, and experience.">
+  <meta name="keywords" content="Viraj Kulye, Python Developer, Data Engineer, AI/ML, Portfolio, Data Analysis, ETL, Machine Learning">
+  <meta name="author" content="Viraj Kulye">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://viraj1474.github.io/portfolio/">
+  <meta property="og:title" content="Viraj Kulye | Python Developer & Data Engineer">
+  <meta property="og:description" content="Portfolio of Viraj Kulye - Python Developer, Data Engineer and AI/ML Enthusiast. Explore my projects, skills, and experience.">
+  <meta property="og:image" content="https://viraj1474.github.io/portfolio/images/og-image.jpg">
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://viraj1474.github.io/portfolio/">
+  <meta property="twitter:title" content="Viraj Kulye | Python Developer & Data Engineer">
+  <meta property="twitter:description" content="Portfolio of Viraj Kulye - Python Developer, Data Engineer and AI/ML Enthusiast. Explore my projects, skills, and experience.">
+  <meta property="twitter:image" content="https://viraj1474.github.io/portfolio/images/og-image.jpg">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/icon/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/icon/apple-touch-icon.png">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="css/style.css">
+  
+  <!-- Preconnect to Font CDN -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  
+  <!-- Preload critical resources -->
+  <link rel="preload" href="css/style.css" as="style">
+  <link rel="preload" href="js/main.js" as="script">
+  
+  <!-- PWA Support -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#d4af37">
+  
+  <!-- Privacy-friendly Analytics (Replace "yourdomain.com" with your actual domain) -->
+  <script defer data-domain="yourdomain.com" src="https://plausible.io/js/plausible.js"></script>
 </head>
 <body>
+  <!-- Skip to content link for accessibility -->
+  <a href="#hero" class="skip-link">Skip to content</a>
+
   <!-- Navbar -->
-  <header>
-    <nav>
-      <h2 class="logo">Viraj Kulye</h2>
+  <header class="nav-container" role="banner">
+    <h2 class="logo">Viraj Kulye</h2>
+    <button class="hamburger" id="hamburger" aria-label="Toggle Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <!-- Theme toggle button (controlled by js/main.js) -->
+    <button id="theme-toggle" class="theme-btn" aria-label="Toggle Theme">🌙</button>
+    <nav class="nav-menu" id="nav-menu">
       <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="projects.html">Projects</a></li>
-        <li><a href="contact.html">Contact</a></li>
+        <li><a href="#hero" class="nav-link active">Home</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#resume" class="nav-link">Resume</a></li>
+        <li><a href="#certificates" class="nav-link">Certificates</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
       </ul>
     </nav>
   </header>
 
   <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-text">
-      <h1>Hi, I’m <span>Viraj Kulye</span></h1>
-      <p>I’m passionate about <strong>Python</strong>, <strong>Data Engineering</strong>, and <strong>AI/ML</strong>.  
-         I enjoy creating solutions that blend data, technology, and innovation.</p>
-      <a href="projects.html" class="btn">See My Work</a>
+  <section id="hero" class="hero">
+    <div class="hero-content">
+      <h1>Hi, I'm <span>Viraj Kulye</span></h1>
+      <p><span id="typed-text"></span></p>
+      <div class="hero-buttons">
+        <a href="#projects" class="btn">View Projects</a>
+        <a href="#resume" class="btn-outline">View Resume</a>
+      </div>
+      <div class="social-links">
+        <a href="https://linkedin.com/in/virajkulye" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="mailto:virajkulye1474@gmail.com"><i class="fas fa-envelope"></i></a>
+        <a href="https://www.kaggle.com/virajkulye" target="_blank"><i class="fab fa-kaggle"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="about">
+    <div class="about-content">
+      <img src="images/profile.jpg" alt="Viraj Kulye" class="profile-pic" loading="lazy">
+      <div>
+        <h1>About Me</h1>
+        <p>Hello! I’m Viraj Kulye, a tech professional passionate about building impactful solutions with Python, Data Engineering, and AI/ML.</p>
+        <p>I enjoy solving complex problems and learning emerging technologies. Outside coding, I explore open-source projects and continuously refine my skills.</p>
+        <p>My goal is to grow as a professional while making a difference through technology.</p>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="skills">
+    <h1>Skills</h1>
+    <div class="skills-grid">
+      <span>Python</span>
+      <span>Pandas</span>
+      <span>NumPy</span>
+      <span>Scikit-Learn</span>
+      <span>Streamlit</span>
+      <span>Plotly</span>
+      <span>SQL</span>
+      <span>Azure</span>
+      <span>Data Analysis</span>
+      <span>ETL</span>
+    </div>
+  </section>
+
+
+  <!-- Projects Section -->
+<section id="projects" class="projects">
+  <h1>My Projects</h1>
+  <p>Here are some projects I’ve built. Explore more on my <a href="https://github.com/Viraj1474" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+  <div class="projects-grid">
+
+    <!-- Project 1 -->
+    <div class="project-card">
+      <div class="project-card-inner">
+        <div class="project-card-front">
+          <h2>Customer Churn Prediction</h2>
+          <p class="project-short">Predict customer churn using machine learning and visualize insights.</p>
+          <div class="tech-badges">
+            <span>Python</span>
+            <span>Pandas</span>
+            <span>scikit-learn</span>
+            <span>Matplotlib</span>
+            <span>Seaborn</span>
+          </div>
+          <div class="project-actions">
+            <button class="project-details-btn" data-title="Customer Churn Prediction" data-desc="Predict customer churn using ML models and visualizations. Includes data preprocessing, model training, and evaluation." data-tech="Python,Pandas,scikit-learn,Matplotlib,Seaborn" data-link="https://github.com/Viraj1474/customer-churn-prediction">Details</button>
+          </div>
+        </div>
+        <div class="project-card-back">
+          <p class="project-details">Machine learning model built with Python, Pandas, scikit-learn. Visualized insights with Matplotlib and Seaborn, deployed a dashboard for predictions.</p>
+          <a href="https://github.com/Viraj1474/customer-churn-prediction" target="_blank" class="btn">View on GitHub</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 2 -->
+    <div class="project-card">
+      <div class="project-card-inner">
+        <div class="project-card-front">
+          <h2>Sentiment Analysis</h2>
+          <p class="project-short">Analyze app ratings, reviews, and sentiment trends with an interactive dashboard.</p>
+          <div class="tech-badges">
+            <span>Python</span>
+            <span>Streamlit</span>
+            <span>Pandas</span>
+            <span>NumPy</span>
+            <span>Plotly</span>
+            <span>HTML</span>
+            <span>CSS</span>
+          </div>
+          <div class="project-actions">
+            <button class="project-details-btn" data-title="Sentiment Analysis" data-desc="Interactive dashboard for sentiment analysis on app reviews with filtering and KPI visualization." data-tech="Python,Streamlit,Pandas,NumPy,Plotly" data-link="https://github.com/Viraj1474/sentiment_analysis">Details</button>
+          </div>
+        </div>
+        <div class="project-card-back">
+          <p class="project-details">This dashboard includes advanced KPIs, interactive charts, and filters to visualize app performance, engagement, and sentiment trends.</p>
+          <a href="https://github.com/Viraj1474/sentiment_analysis" target="_blank" class="btn">View on GitHub</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 3 -->
+    <div class="project-card">
+      <div class="project-card-inner">
+        <div class="project-card-front">
+          <h2>Data Pipeline Dashboard</h2>
+          <p class="project-short">Automated data pipeline for real-time business metrics and KPIs visualization.</p>
+          <div class="tech-badges">
+            <span>Pandas</span>
+            <span>NumPy</span>
+            <span>Scikit-Learn</span>
+            <span>Streamlit</span>
+            <span>Plotly</span>
+            <span>Sweetviz</span>
+            <span>YData Profiling</span>
+            <span>Matplotlib</span>
+            <span>Seaborn</span>
+          </div>
+          <div class="project-actions">
+            <button class="project-details-btn" data-title="Data Pipeline Dashboard" data-desc="Complete data pipeline to collect, process, and visualize business metrics in real-time; includes ETL automation and dashboards." data-tech="Pandas,NumPy,Scikit-Learn,Streamlit,Plotly" data-link="https://github.com/Viraj1474/data-pipeline-dashboard">Details</button>
+          </div>
+        </div>
+        <div class="project-card-back">
+          <p class="project-details">Built a complete data pipeline to collect, process, and visualize business metrics in real-time. Integrated ETL processes, automated workflows, and created an interactive dashboard for monitoring KPIs.</p>
+          <a href="https://github.com/Viraj1474/data-pipeline-dashboard" target="_blank" class="btn">View on GitHub</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 4 -->
+    <div class="project-card">
+      <div class="project-card-inner">
+        <div class="project-card-front">
+          <h2>Customer Support Ticket Intelligence System</h2>
+          <p class="project-short">End-to-end analytics and AI-powered SQL exploration system for customer support ticket analysis.</p>
+          <div class="tech-badges">
+            <span>Python</span>
+            <span>SQL (SQLite)</span>
+            <span>Pandas</span>
+            <span>NumPy</span>
+            <span>Scikit-Learn</span>
+            <span>Streamlit</span>
+            <span>Google Gemini API</span>
+          </div>
+          <div class="project-actions">
+            <button class="project-details-btn" data-title="Customer Support Ticket Intelligence System" data-desc="Comprehensive system for analyzing support tickets with SQL analytics, ML-based priority prediction, and AI-powered natural language SQL generation for business insights." data-tech="Python,SQL,Pandas,NumPy,Scikit-Learn,Streamlit,Google Gemini API" data-link="https://github.com/Viraj1474/support-ticket-intelligence">Details</button>
+          </div>
+        </div>
+        <div class="project-card-back">
+          <p class="project-details">Built an end-to-end system combining SQL analytics, machine learning for priority prediction, and AI-powered SQL generation. Features graceful degradation when APIs are unavailable, ensuring reliability and business utility.</p>
+          <a href="https://github.com/Viraj1474/support-ticket-intelligence" target="_blank" class="btn">View on GitHub</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 5 -->
+    <div class="project-card">
+      <div class="project-card-inner">
+        <div class="project-card-front">
+          <h2>Smart System for Handling Customer Support Tickets</h2>
+          <p class="project-short">Support operations dashboard with NLP, ML, and rule-based churn detection for at-risk customers.</p>
+          <div class="tech-badges">
+            <span>Python</span>
+            <span>Streamlit</span>
+            <span>Pandas</span>
+            <span>NumPy</span>
+            <span>Scikit-Learn</span>
+            <span>NLP</span>
+            <span>TF-IDF</span>
+          </div>
+          <div class="project-actions">
+            <button class="project-details-btn" data-title="Smart System for Handling Customer Support Tickets" data-desc="Support operations dashboard combining text preprocessing, baseline ML models, and interpretable rule-based churn detection to identify urgent tickets and at-risk customers." data-tech="Python,Streamlit,Pandas,NumPy,Scikit-Learn,NLP,TF-IDF" data-link="https://github.com/Viraj1474/customer-support-ticket-intelligence">Details</button>
+          </div>
+        </div>
+        <div class="project-card-back">
+          <p class="project-details">Built a practical support operations dashboard combining NLP for text analysis, ML models for exploration, and transparent rule-based logic for churn risk detection. Dashboard includes filtering, export functionality, and real-time insight generation.</p>
+          <a href="https://github.com/Viraj1474/customer-support-ticket-intelligence" target="_blank" class="btn">View on GitHub</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+  <!-- Resume Section -->
+  <section id="resume" class="resume">
+    <h1>Resume</h1>
+    <p>Download or view my resume below:</p>
+    <div class="resume-container">
+      <a href="files/VIRAJK_RESUME.pdf" download class="btn">📄 Download Resume</a>
+      <iframe src="files/VIRAJK_RESUME.pdf" class="resume-viewer" title="Resume PDF"></iframe>
+    </div>
+  </section>
+
+  <!-- Certificates Section -->
+  <section id="certificates" class="certificates">
+    <h1>Certificates & Achievements</h1>
+    <p>Click on each item to view the certificate or badge.</p>
+
+    <h2>Badges</h2>
+    <div class="certificates-grid">
+      <a href="https://www.credly.com/badges/29de840f-1e66-43cd-9d93-bf1cde4979c3" target="_blank" class="certificate-card badge-card">
+        <h3>Microsoft Certified: Azure Fundamentals</h3>
+        <p><strong>Issuer:</strong> Microsoft</p>
+        <p><strong>Date:</strong> 2025</p>
+      </a>
+      <a href="https://www.credly.com/earner/earned/badge/fb39692d-708f-432f-be16-14afb71cb47c" target="_blank" class="certificate-card badge-card">
+        <h3>Data Analysis Using Python</h3>
+        <p><strong>Issuer:</strong> IBM</p>
+        <p><strong>Date:</strong> 2025</p>
+      </a>
+      <a href="https://www.credly.com/badges/45d1d12d-d5aa-4658-a675-bf4d963453a9" target="_blank" class="certificate-card badge-card">
+        <h3>Derive Insights from BigQuery Data Skill Badge</h3>
+        <p><strong>Issuer:</strong> Google</p>
+        <p><strong>Date:</strong> 2025</p>
+      </a>
+    </div>
+
+    <h2>Certificates</h2>
+    <div class="certificates-grid">
+      <a href="https://www.credly.com/badges/29de840f-1e66-43cd-9d93-bf1cde4979c3" target="_blank" class="certificate-card">
+        <h3>Python Certification</h3>
+        <p><strong>Issuer:</strong> IBM / Platform</p>
+        <p><strong>Date:</strong> 2025</p>
+      </a>
+      <a href="https://drive.google.com/file/d/1sP_ushsnsPcQof_897WQ97Y3rNcAtqMH/view?usp=sharing" target="_blank" class="certificate-card">
+        <h3>Azure Fundamentals Certification</h3>
+        <p><strong>Issuer:</strong> Microsoft</p>
+        <p><strong>Date:</strong> 2025</p>
+      </a>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact">
+    <h1>Contact Me</h1>
+    <p>Feel free to reach out for collaborations, opportunities, or just a chat!</p>
+    
+    <!-- Contact Form -->
+    <form id="contact-form" class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <div class="form-group">
+        <label for="name" class="sr-only">Your Name</label>
+        <input type="text" id="name" name="name" placeholder="Your Name" required minlength="2" aria-describedby="name-validation">
+        <span class="validation-message" id="name-validation"></span>
+      </div>
+      <div class="form-group">
+        <label for="email" class="sr-only">Your Email</label>
+        <input type="email" id="email" name="email" placeholder="Your Email" required aria-describedby="email-validation">
+        <span class="validation-message" id="email-validation"></span>
+      </div>
+      <div class="form-group">
+        <label for="message" class="sr-only">Your Message</label>
+        <textarea id="message" name="message" rows="5" placeholder="Your Message" required minlength="10" aria-describedby="message-validation"></textarea>
+        <span class="validation-message" id="message-validation"></span>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn">Send Message</button>
+      </div>
+      <div class="form-status-container">
+        <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+      </div>
+    </form>
+
+    <div class="contact-info">
+      <p>Email: <a href="mailto:virajkulye1474@gmail.com">virajkulye1474@gmail.com</a></p>
+      <p>GitHub: <a href="https://github.com/Viraj1474" target="_blank">github.com/Viraj1474</a></p>
+      <p>LinkedIn: <a href="https://linkedin.com/in/virajkulye" target="_blank">linkedin.com/in/virajkulye</a></p>
     </div>
   </section>
 
@@ -35,6 +360,20 @@
     <p>© 2025 Viraj Kulye. All Rights Reserved.</p>
   </footer>
 
-  <script src="js/script.js"></script>
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
+  <script src="js/advanced-features.js"></script>
+  <!-- Project details modal -->
+  <div id="project-modal" class="modal" aria-hidden="true">
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button class="modal-close" data-close aria-label="Close modal">✕</button>
+      <h2 id="modal-title"></h2>
+      <p id="modal-desc"></p>
+      <p id="modal-tech"></p>
+      <a id="modal-link" class="btn" target="_blank" rel="noopener noreferrer">View Project</a>
+    </div>
+  </div>
 </body>
 </html>
+
