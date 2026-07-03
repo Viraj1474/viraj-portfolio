@@ -43,6 +43,12 @@ body {
   overflow-x: hidden;
 }
 
+img,
+iframe,
+video {
+  max-width: 100%;
+}
+
 /* Prevent body scroll when mobile menu is active */
 body.menu-open {
   overflow: hidden;
@@ -144,6 +150,10 @@ h3 { font-size:1.2rem; }
   background: var(--accent-color);
 }
 .nav-links li a:hover { color:var(--accent-color); }
+
+section {
+  scroll-margin-top: 90px;
+}
 
 .theme-btn {
   cursor:pointer; padding:6px 12px; border-radius:8px; border:none;
@@ -416,7 +426,7 @@ html.no-js section {
     padding: 50px 20px;
   }
   .resume-viewer {
-    height: 600px;
+    height: min(70vh, 620px);
   }
 }
 
@@ -642,6 +652,9 @@ html.no-js section {
     top: 60px;
     left: -100%;
     width: 100%;
+    max-height: calc(100vh - 60px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
     background: var(--bg-color);
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     transition: left 0.3s ease;
@@ -670,7 +683,12 @@ html.no-js section {
 
   .about { flex-direction:column; }
   .hero-buttons { flex-direction:column; }
-  .skills-grid, .tech-badges { justify-content:center; }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 10px;
+  }
+  .tech-badges { justify-content:center; }
   .project-card-front, .project-card-back { padding:15px; }
   .contact { padding: 60px 20px; }
   .contact-form { padding: 0 10px; }
@@ -821,7 +839,7 @@ body.loaded #bg-canvas {
   
   /* Skills grid */
   .skills-grid {
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(96px, 1fr));
     gap: 10px;
   }
   
@@ -969,9 +987,11 @@ body.loaded #bg-canvas {
   }
   
   /* Show all project info on front for mobile */
-  .project-detail-btn {
+  .project-details-btn {
     display: inline-block;
     margin-top: 15px;
+    width: 100%;
+    max-width: 240px;
   }
   
   /* Certificates section */
@@ -1111,7 +1131,7 @@ body.loaded #bg-canvas {
   
   /* Skills grid - smaller on very small screens */
   .skills-grid {
-    grid-template-columns: repeat(auto-fit, minmax(75px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(72px, 1fr));
     gap: 6px;
   }
   
@@ -1156,6 +1176,23 @@ body.loaded #bg-canvas {
   .profile-pic {
     width: 120px;
     height: 120px;
+  }
+
+  .project-card h2 {
+    font-size: 1.25rem;
+  }
+
+  .project-card .project-short,
+  .project-card .project-details {
+    font-size: 0.92rem;
+  }
+
+  .project-details-btn {
+    max-width: none;
+  }
+
+  .resume-viewer {
+    height: 55vh;
   }
 }
 

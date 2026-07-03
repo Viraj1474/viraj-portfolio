@@ -18,6 +18,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const toggleBtn = document.getElementById('theme-toggle');
   const hamburger = document.getElementById('hamburger');
   const navMenu = document.getElementById('nav-menu');
+  const toggleTheme = () => {
+    body.classList.toggle('dark-mode');
+    const isDarkMode = body.classList.contains('dark-mode');
+    if (toggleBtn) {
+      toggleBtn.textContent = isDarkMode ? '☀️' : '🌙';
+    }
+    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+  };
   // Theme toggle (guard in case the button isn't present)
   if (toggleBtn) {
     if (localStorage.getItem('theme') === 'dark') {
@@ -27,16 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
       toggleBtn.textContent = '🌙';
     }
 
-    toggleBtn.addEventListener('click', () => {
-      body.classList.toggle('dark-mode');
-      if (body.classList.contains('dark-mode')) {
-        toggleBtn.textContent = '☀️';
-        localStorage.setItem('theme', 'dark');
-      } else {
-        toggleBtn.textContent = '🌙';
-        localStorage.setItem('theme', 'light');
-      }
-    });
+    toggleBtn.addEventListener('click', toggleTheme);
   } else {
     // Respect stored theme even without a toggle button
     if (localStorage.getItem('theme') === 'dark') {
